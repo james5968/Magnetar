@@ -1,0 +1,32 @@
+{
+  "name": "magnetar",
+  "version": "0.0.1",
+  "description": "Magnetar Dashboard",
+  "productName": "Magnetar",
+  "cordovaId": "io.cordova.magnetar",
+  "capacitorId": "",
+  "author": "James Ashford <james.ashford@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "quasar": "^1.0.0",
+    "vue-digital-clock": "^2.0.0",
+    "vue-layout-composer": "^0.1.5",
+    "vue-moveable": "^1.8.2",
+    "vue-weather-widget": "^2.4.0"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  },
+  "browserslist": [
+    "last 1 version, not dead, ie >= 11"
+  ]
+}

@@ -64,8 +64,4 @@ export default {
 };
 </script>
 
-<style scoped>
-figure {
-  margin: 1em 0 0 0;
-}
-</style>
+<style scoped></style>

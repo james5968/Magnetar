@@ -12,14 +12,18 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "axios": "^0.19.2",
     "quasar": "^1.0.0",
+    "vue-axios": "^2.1.5",
     "vue-digital-clock": "^2.0.0",
+    "vue-grid-layout": "^2.3.7",
     "vue-layout-composer": "^0.1.5",
-    "vue-moveable": "^1.8.2",
+    "vue-moveable": "^1.8.3",
     "vue-weather-widget": "^2.4.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0"
+    "@quasar/app": "^1.0.0",
+    "vue-friendly-iframe": "^0.17.0"
   },
   "engines": {
     "node": ">= 10.18.1",

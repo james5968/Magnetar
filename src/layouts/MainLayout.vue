@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-drawer :width="200" v-model="left" side="left" overlay behavior="mobile">
       <q-list class="fit" padding>
-        <q-item clickable v-ripple>
+        <q-item to="/" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="dashboard" />
           </q-item-section>
@@ -22,7 +22,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item to="/settings" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="settings" />
           </q-item-section>
@@ -32,7 +32,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item to="/about" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="info" />
           </q-item-section>

@@ -2,16 +2,15 @@
   <main v-if="tick">
     <template>
       <analog-clock :minute="time.minutes" :tick="tick"></analog-clock>
-      <text-clock :time="time"></text-clock>
     </template>
   </main>
 </template>
 
 <script>
 import AnalogClock from "./analogClock.vue";
-import TextClock from "../components/textClock.vue";
+
 export default {
-  components: { AnalogClock, TextClock },
+  components: { AnalogClock},
   data() {
     return {
       tick: 0,
@@ -41,13 +40,14 @@ export default {
 
 <style lang="scss">
 .analog-clock {
-  width: 100%;
-  padding-top: 100%;
-  top: 30%;
-  right: 30%;
-  padding-left: 0;
+  width: 390px;
+  height: 390px;
+
+  margin-left: 26px;
+  margin-top: 197px;
+
   border-radius: 100%;
-  position: relative;
+  position: inline-block;
   background-color: black;
   border: 2px solid white;
   transform: translate3d(-1.5rem, -50%, 0);
@@ -136,41 +136,6 @@ export default {
         height: 12.5%;
       }
     }
-  }
-}
-
-.text-clock {
-  display: flex;
-  top: -45%;
-  left: 70%;
-  font-size: 2rem;
-  position: relative;
-  color: white;
-  transform: scale(0.8);
-  white-space: nowrap;
-
-  &__col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    line-height: 1.1;
-    padding: 0.5rem 0.5rem 0.65rem;
-
-    &.-meridiem {
-      text-transform: uppercase;
-      font-size: 0.85em;
-      background-color: white;
-      color: black;
-      font-weight: 500;
-      box-shadow: 0 0.25rem 0.75rem rgba(black, 0.1);
-    }
-  }
-
-  &__row {
-    flex: 1 0 0;
-    display: flex;
-    align-items: center;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <q-page v-touch-hold:1000.mouse="handleHold">
+  <q-page  v-touch-hold:1000.mouse="handleHold">
     <editBar
       @close-edit="closeEdit()"
       @save-edit="closeEdit()"
@@ -7,51 +7,11 @@
       :editMode="editMode"
       :transformMode="transformMode"
     />
-    <widgetFrame
-      
-      widgetWidth="420"
-      widgetHeight="420"
-      :transformOn="transformMode"
-      :editMode="editMode"
-      id="analogClock"
-    >
-      <analogClock slot="widget" />
-    </widgetFrame>
-    <widgetFrame
-      widgetWidth="300"
-      widgetHeight="100"
-      :transformOn="transformMode"
-      :editMode="editMode"
-      id="digitalClock"
-    >
-      <DigitalClock
-        slot="widget"
-        style="font-size:100px; line-height:65px"
-        :blink="true"
-      />
-    </widgetFrame>
-    <widgetFrame
-      widgetWidth="630"
-      widgetHeight="230"
-      :transformOn="transformMode"
-      :editMode="editMode"
-      id="weather"
-    >
-      <weather slot="widget" style="width:600px; height:200px" />
-      <weatherSettings slot="widget-settings"  />
-    </widgetFrame>
-    <widgetFrame
-      widgetWidth="480"
-      widgetHeight="150"
-      :transformOn="transformMode"
-      :editMode="editMode"
-      id="currency"
-    >
-      <currency slot="widget" style="width:450px; height:100px" />
-    </widgetFrame>
-
+    <div class="main-container">
+    <component v-for="(widget, index) in activeWidgets" :key="index" :arrPos='index' :is="activeWidgets[index]"></component>
+    </div>
     <div
-      v-if="!editMode"
+      v-if="!editMode && !transformMode"
       class="swipe-box"
       v-touch-swipe.mouse.left="handleSwipeUp"
     ></div>
@@ -59,42 +19,38 @@
 </template>
 
 <script>
-import widgetFrame from "../components/frames/widgetFrame.vue";
-import analogClock from "../components/mainClock.vue";
-import DigitalClock from "vue-digital-clock";
 import editBar from "../components/UI/editBar.vue";
-import weather from "../components/weather.vue";
-import currency from "../components/currency.vue";
-import weatherSettings from "../components/weatherSettings.vue";
+
+import {mapActions, mapState } from "vuex";
+
+
 export default {
-  components: {
-    widgetFrame,
-    analogClock,
-    DigitalClock,
+  components:{
     editBar,
-    weather,
-    currency,
-    weatherSettings
   },
   data() {
     return {
-      editMode: false,
-      transformMode: false,
-      activeWidgets:{}
+     
+      
     };
   },
+  computed:{
+    ...mapState("settings", ["editMode","transformMode","activeWidgets"]),
+   
+  },
   methods: {
+    ...mapActions("settings", ["setEditMode","setTransformMode"]),
     handleHold() {
-      this.transformMode = !this.transformMode;
+      this.setTransformMode(true);
     },
     handleSwipeUp() {
-      this.editMode = true;
+      this.setEditMode(true);
     },
     endTransform() {
-      this.transformMode = false;
+      this.setTransformMode(false);
     },
     closeEdit() {
-      this.editMode = false;
+     this.setEditMode(false);
     }
   }
 };
@@ -108,4 +64,10 @@ export default {
   width: 30vw;
   height: 100vh;
 }
+.main-container{
+  display:fixed !important;
+  height:100vh;
+  width:100vw;
+}
+
 </style>

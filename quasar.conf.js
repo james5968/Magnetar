@@ -11,7 +11,7 @@ module.exports = function( /* ctx */ ) {
         // app boot file (/src/boot)
         // --> boot files are part of "main.js"
         // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-        boot: ["layoutComposer"],
+        boot: ["axios", "widgetRegistration"],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
         css: ["app.sass"],
@@ -45,10 +45,10 @@ module.exports = function( /* ctx */ ) {
             all: "auto",
 
             components: [],
-            directives: [],
+            directives: ['Ripple'],
 
             // Quasar plugins
-            plugins: []
+            plugins: ['LocalStorage', ]
         },
 
         // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -81,7 +81,7 @@ module.exports = function( /* ctx */ ) {
         devServer: {
             https: false,
             port: 8080,
-            open: true // opens browser window automatically
+            open: false // opens browser window automatically
         },
 
         // animations: 'all', // --- includes all animations

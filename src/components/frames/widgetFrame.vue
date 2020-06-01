@@ -5,8 +5,9 @@
       :style="{
         transform: transformed,
         width: widgetWidth + 'px',
-        height: widgetHeight + 'px'
+        height: widgetHeight + 'px',
       }"
+      style="position:fixed;"
       v-bind="moveable"
       @drag="handleDrag"
       @resize="handleResize"
@@ -20,6 +21,8 @@
         :editOn="editMode"
         :widgetHeight="widgetHeight"
         :widgetWidth="widgetWidth"
+        :arrPos="arrPos"
+        :id="id"
       >
         <slot name="widget" slot="widget" />
         <slot name="widget-settings" slot="widget-settings" />
@@ -38,7 +41,7 @@ export default {
     Moveable,
     moveableContainer
   },
-  props: ["editMode", "widgetWidth", "widgetHeight", "transformOn","id"],
+  props: ["editMode", "widgetWidth", "widgetHeight", "transformOn","id","arrPos"],
   data() {
     return {
       icon: "edit",
@@ -138,6 +141,7 @@ export default {
 </script>
 
 <style>
+.widget-c
 .centerBtn {
   margin-left: 45vw;
   margin-right: 45vw;

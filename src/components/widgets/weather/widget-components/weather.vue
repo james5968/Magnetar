@@ -9,10 +9,10 @@
         <div>
           <span class="temp">
             <div class="temp-label">Temperature</div>
-            {{ (weather.main.temp - 273.15).toFixed(1) }}°c </span
-          ><span class="temp"
-            ><div class="temp-label">Feels like</div>
-            {{ (weather.main.feels_like - 273.15).toFixed(1) }}°c</span
+            {{ showFahrenheit ? fahrenheitMain:celciusMain  }} </span
+          ><span v-if="feelsLike" class="temp"
+            ><div  class="temp-label">Feels like</div>
+            {{ showFahrenheit ? fahrenheitFeels:celciusFeels  }}</span
           >
         </div>
         <div class="weather">{{ weather.weather[0].main }}</div>
@@ -22,20 +22,31 @@
 </template>
 
 <script>
+import {mapGetters,mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       weather: null,
       polling: null,
-      request: "Redhill"
     };
   },
   computed: {
+     ...mapState("settings", ["settings"]),
+    location(){return this.settings.weather.location},
+    feelsLike(){return this.settings.weather.feelsLike},
+    showFahrenheit(){return this.settings.weather.fahrenheit},
     requestURL() {
       let baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
       let apiKey = "&appid=33d91a10b952ab3cb17eab0e2f388026";
-      return baseURL + this.request + apiKey;
-    }
+      
+      return baseURL + this.location + apiKey;
+    },
+    celciusMain(){ return ((this.weather.main.temp - 273.15).toFixed(1) + " °c")},
+    fahrenheitMain(){ return (((this.weather.main.temp * (9/5))-459.67).toFixed(1) + " °f")},
+    celciusFeels(){ return ((this.weather.main.feels_like - 273.15).toFixed(1) + " °c")},
+    fahrenheitFeels(){ return (((this.weather.main.feels_like * (9/5))-459.67).toFixed(1) + " °f")},
+    
+   
   },
   methods: {
     fetchWeather() {
@@ -87,12 +98,17 @@ export default {
     this.fetchWeather();
     this.polling = setInterval(() => {
       this.fetchWeather();
-    }, 1800000);
+    }, 20000);
     console.log(this.requestURL);
   },
   mounted() {
     if (localStorage.magnetarWeather) {
       this.request = localStorage.request;
+    }
+  },
+  watch:{
+    location:function(){
+      this.fetchWeather();
     }
   }
 };
